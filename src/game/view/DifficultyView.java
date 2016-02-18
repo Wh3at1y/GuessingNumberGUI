@@ -1,8 +1,7 @@
 package game.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import game.controller.GameController;
 
@@ -59,6 +58,26 @@ public class DifficultyView extends JPanel
 	
 	private void buildListeners()
 	{
-		
+		easyButton.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent clicked)
+					{
+						baseController.setInfoText("Easy", "Yes");
+					}
+				});
+		normalButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent clicked)
+			{
+				baseController.setInfoText("Normal", "Yes");
+			}
+		});
+		hardButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent clicked)
+			{
+				baseController.setInfoText("Hard", "No");
+			}
+		});
 	}
 }
