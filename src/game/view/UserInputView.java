@@ -2,9 +2,13 @@ package game.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
 import game.controller.GameController;
+import game.model.RandomNumbers;
 
 public class UserInputView extends JPanel
 {
@@ -14,6 +18,8 @@ public class UserInputView extends JPanel
 	
 	private JButton enterButton;
 	private JTextField userInputField;
+	
+	private int userGuess;
 	
 	public UserInputView(GameController baseController)
 	{
@@ -31,7 +37,7 @@ public class UserInputView extends JPanel
 	
 	private void buildPanel()
 	{
-		this.setPreferredSize(new Dimension(500,100));
+		setPreferredSize(new Dimension(500,100));
 		setBackground(Color.WHITE);
 		setLayout(baseLayout);
 		add(enterButton);
@@ -52,6 +58,25 @@ public class UserInputView extends JPanel
 	
 	private void buildListeners()
 	{
-		
+		enterButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent clicked)
+				{
+					userGuess = Integer.parseInt(userInputField.getText());
+					baseController.getFrame().getBasePanel().getDisplayView().setGuessesText(baseController.getNumbers().getCounter());
+					if(baseController.getFrame().getBasePanel().getDiffView().getDifficultyNumber() == 1)
+						baseController.getNumbers().checkEasy();
+					else if(baseController.getFrame().getBasePanel().getDiffView().getDifficultyNumber() == 2)
+						baseController.getNumbers().checkNormal();
+					else
+						baseController.getNumbers().checkHard();
+				}
+			});
 	}
+	
+	public int getUserGuess()
+	{
+		return userGuess;
+	}
+	
 }

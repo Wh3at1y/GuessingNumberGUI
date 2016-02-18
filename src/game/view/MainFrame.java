@@ -1,7 +1,6 @@
 package game.view;
 
 import javax.swing.JFrame;
-
 import game.controller.GameController;
 
 public class MainFrame extends JFrame
@@ -23,7 +22,7 @@ public class MainFrame extends JFrame
 		this.setResizable(false);
 		this.setSize(500,400);
 		this.setTitle("Guess the Number!");
-		setContentPane(basePanel);
+		this.setContentPane(basePanel);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}
@@ -32,4 +31,5 @@ public class MainFrame extends JFrame
 	{
 		return basePanel;
 	}
+
 }

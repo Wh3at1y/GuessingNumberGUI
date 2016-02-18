@@ -2,18 +2,24 @@ package game.view;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import game.controller.GameController;
+import game.model.RandomNumbers;
 
 public class DifficultyView extends JPanel
 {
 	private GameController baseController;
+	private RandomNumbers genNum;
 	
 	private SpringLayout baseLayout;
 	
 	private JButton easyButton;
 	private JButton normalButton;
 	private JButton hardButton;
+	
+	private int difficultyNumber;
 	
 	public DifficultyView(GameController baseController)
 	{
@@ -32,7 +38,7 @@ public class DifficultyView extends JPanel
 	
 	private void buildPanel()
 	{
-		this.setPreferredSize(new Dimension(500, 100));
+		setPreferredSize(new Dimension(500, 100));
 		setLayout(baseLayout);
 		setBackground(Color.WHITE);
 		add(easyButton);
@@ -62,22 +68,36 @@ public class DifficultyView extends JPanel
 				{
 					public void actionPerformed(ActionEvent clicked)
 					{
-						baseController.setInfoText("Easy", "Yes");
+						baseController.setInfoText("Easy", "Yes", "1-50");
+						baseController.getNumbers().generateEasy();
+						
+						difficultyNumber = 1;
 					}
 				});
 		normalButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-				baseController.setInfoText("Normal", "Yes");
+				baseController.setInfoText("Normal", "Yes", "1-150");
+				baseController.getNumbers().generateNormal();
+				
+				difficultyNumber = 2;
 			}
 		});
 		hardButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-				baseController.setInfoText("Hard", "No");
+				baseController.setInfoText("Hard", "No", "1-300");
+				baseController.getNumbers().generateHard();
+				
+				difficultyNumber = 3;
 			}
 		});
+	}
+	
+	public int getDifficultyNumber()
+	{
+		return difficultyNumber;
 	}
 }

@@ -24,8 +24,6 @@ public class MainPanel extends JPanel
 		userInputView = new UserInputView(baseController);
 		diffView = new DifficultyView(baseController);
 		displayView = new DisplayInfoView(baseController);
-		baseLayout.putConstraint(SpringLayout.NORTH, displayView, 0, SpringLayout.SOUTH, userInputView);
-		
 		
 		buildPanel();
 		buildPlacements();
@@ -34,6 +32,7 @@ public class MainPanel extends JPanel
 	
 	private void buildPanel()
 	{
+		setBackground(Color.WHITE);
 		setLayout(baseLayout);
 		add(userInputView);
 		add(diffView);
@@ -43,6 +42,7 @@ public class MainPanel extends JPanel
 	
 	private void buildPlacements()
 	{
+		baseLayout.putConstraint(SpringLayout.NORTH, displayView, 0, SpringLayout.SOUTH, userInputView);
 		baseLayout.putConstraint(SpringLayout.NORTH, userInputView, 0, SpringLayout.SOUTH, diffView);
 	}
 	

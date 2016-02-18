@@ -22,12 +22,17 @@ public class DisplayInfoView extends JPanel
 		this.baseController = baseController;
 		
 		baseLayout = new SpringLayout();
-		
 		clearButton = new JButton("Clear Guesses");
 		displayGuesses = new JTextArea();
+		displayGuesses.setEditable(false);
 		displayHint = new JTextArea();
+		displayHint.setEditable(false);
+		displayHint.setWrapStyleWord(true);
+		displayHint.setLineWrap(true);
 		displayGameInfo = new JTextArea();
 		displayGameInfo.setEditable(false);
+		displayGameInfo.setWrapStyleWord(true);
+		displayGameInfo.setLineWrap(true);
 		
 		buildPanel();
 		buildPlacements();
@@ -36,7 +41,7 @@ public class DisplayInfoView extends JPanel
 	
 	private void buildPanel()
 	{
-		this.setPreferredSize(new Dimension(500, 171));
+		setPreferredSize(new Dimension(500, 171));
 		setBackground(Color.WHITE);
 		setLayout(baseLayout);
 		add(clearButton);
@@ -47,19 +52,19 @@ public class DisplayInfoView extends JPanel
 	
 	private void buildPlacements()
 	{
+		baseLayout.putConstraint(SpringLayout.EAST, clearButton, -308, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.EAST, displayGuesses, -308, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.WEST, displayHint, 6, SpringLayout.EAST, clearButton);
+		baseLayout.putConstraint(SpringLayout.EAST, displayHint, -6, SpringLayout.WEST, displayGameInfo);
+		baseLayout.putConstraint(SpringLayout.EAST, displayGameInfo, 0, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, displayGameInfo, 10, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, displayGameInfo, -10, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, displayHint, -6, SpringLayout.WEST, displayGameInfo);
 		baseLayout.putConstraint(SpringLayout.WEST, displayGameInfo, -153, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.EAST, displayGameInfo, -10, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.EAST, displayGuesses, -6, SpringLayout.WEST, displayHint);
 		baseLayout.putConstraint(SpringLayout.NORTH, displayHint, 10, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, displayHint, 198, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, displayHint, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, displayGuesses, 10, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, displayGuesses, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, displayGuesses, -6, SpringLayout.NORTH, clearButton);
-		baseLayout.putConstraint(SpringLayout.EAST, clearButton, 0, SpringLayout.EAST, displayGuesses);
 		baseLayout.putConstraint(SpringLayout.WEST, clearButton, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, clearButton, -10, SpringLayout.SOUTH, this);
 	}
@@ -69,8 +74,18 @@ public class DisplayInfoView extends JPanel
 		
 	}
 	
-	public void setInfoText(String setText, String isHelperOn)
+	public void setInfoText(String setText, String isHelperOn, String guessString)
 	{
-		this.displayGameInfo.setText("Difficulty: " + setText + "\nShow Higher/Lower: " + isHelperOn);
+		displayGameInfo.setText("Difficulty: " + setText + "\nHigher/Lower: " + isHelperOn + "\nGuess between: " + guessString);
+	}
+	
+	public void setHintText(String setText)
+	{
+		displayHint.setText(setText);
+	}
+	
+	public void setGuessesText(int counter)
+	{
+		displayGuesses.setText("Amount of Guesses: " + counter);
 	}
 }
