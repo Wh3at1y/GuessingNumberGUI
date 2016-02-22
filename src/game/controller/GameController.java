@@ -10,22 +10,54 @@ public class GameController
 	private RandomNumbers genNumber;
 	private LookAndFeel lookFeel;
 	
+	private String diffText;
+	private String isHelperOn = "";
+	private String showNumbers;
+	
 	public GameController()
 	{
 		baseFrame = new MainFrame(this);
 		genNumber = new RandomNumbers(this);
 		lookFeel = new LookAndFeel();
 		lookFeel.setLook();
-		
-		setInfoText("Not Selected", "Yes", "No mode selected.");
-		
 	}
 	
 	public void start(){}
 	
-	public void setInfoText(String setText, String isHelperOn, String guessString)
+	
+	public void setCounter(int counter)
 	{
-		baseFrame.getBasePanel().getDisplayView().setInfoText(setText, isHelperOn, guessString);
+		genNumber.setCounter(counter);
+	}
+
+	public void setDiffText(String diffText)
+		{
+			this.diffText = diffText;
+		}
+
+	public void setIsHelperOn(String isHelperOn)
+		{
+			this.isHelperOn = isHelperOn;
+		}
+	
+	public void setShowNumbers(String showNumbers)
+	{
+		this.showNumbers = showNumbers;
+	}
+
+	public String getDiffictyText()
+	{
+		return diffText;
+	}
+	
+	public String getIsHelperOn()
+	{
+		return isHelperOn;
+	}
+	
+	public String getShowNumbers()
+	{
+		return showNumbers;
 	}
 	
 	public MainFrame getFrame()

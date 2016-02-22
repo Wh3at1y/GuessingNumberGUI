@@ -80,4 +80,10 @@ public class RandomNumbers
 		{
 			return counter;
 		}
+		
+		public void setCounter(int counter)
+		{
+			this.counter = counter;
+			baseController.getFrame().getBasePanel().getDisplayView().setGuessesText(counter);
+		}
 	}

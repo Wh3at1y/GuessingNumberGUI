@@ -68,8 +68,10 @@ public class DifficultyView extends JPanel
 				{
 					public void actionPerformed(ActionEvent clicked)
 					{
-						baseController.setInfoText("Easy", "Yes", "1-50");
+						baseController.setCounter(0);
 						baseController.getNumbers().generateEasy();
+						baseController.setDiffText("Easy");
+						baseController.getFrame().getBasePanel().getDisplayView().updateInfoText();
 						
 						difficultyNumber = 1;
 					}
@@ -78,8 +80,10 @@ public class DifficultyView extends JPanel
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-				baseController.setInfoText("Normal", "Yes", "1-150");
+				baseController.setCounter(0);
 				baseController.getNumbers().generateNormal();
+				baseController.setDiffText("Normal");
+				baseController.getFrame().getBasePanel().getDisplayView().updateInfoText();
 				
 				difficultyNumber = 2;
 			}
@@ -88,8 +92,10 @@ public class DifficultyView extends JPanel
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-				baseController.setInfoText("Hard", "No", "1-300");
+				baseController.setCounter(0);
 				baseController.getNumbers().generateHard();
+				baseController.setDiffText("Hard");
+				baseController.getFrame().getBasePanel().getDisplayView().updateInfoText();
 				
 				difficultyNumber = 3;
 			}
