@@ -21,17 +21,18 @@ public class DisplayInfoView extends JPanel
 		private JTextArea displayGuesses;
 		private JTextArea displayHint;
 		private JTextArea displayGameInfo;
-		private JCheckBox isHelperOn;
+		private JCheckBox helperCheckBox;
+		
+		private boolean isOn;
 
 		public DisplayInfoView(GameController baseController)
 			{
 				this.baseController = baseController;
-
 				baseLayout = new SpringLayout();
 
-				isHelperOn = new JCheckBox("Higher/Lower Hints");
-				baseLayout.putConstraint(SpringLayout.NORTH, isHelperOn, 60, SpringLayout.NORTH, this);
-				baseLayout.putConstraint(SpringLayout.EAST, isHelperOn, -160, SpringLayout.EAST, this);
+				helperCheckBox = new JCheckBox("Higher/Lower Hints");
+				baseLayout.putConstraint(SpringLayout.NORTH, helperCheckBox, 60, SpringLayout.NORTH, this);
+				baseLayout.putConstraint(SpringLayout.EAST, helperCheckBox, -160, SpringLayout.EAST, this);
 				clearButton = new JButton("Clear Guesses");
 				clearButton.setVisible(true);
 				displayGuesses = new JTextArea();
@@ -54,6 +55,7 @@ public class DisplayInfoView extends JPanel
 				buildPanel();
 				buildPlacements();
 				buildListeners();
+				setHintBox(true);
 			}
 
 		private void buildPanel()
@@ -61,7 +63,7 @@ public class DisplayInfoView extends JPanel
 				setPreferredSize(new Dimension(500, 186));
 				setBackground(Color.WHITE);
 				setLayout(baseLayout);
-				add(isHelperOn);
+				add(helperCheckBox);
 				add(clearButton);
 				add(displayGuesses);
 				add(displayHint);
@@ -85,21 +87,20 @@ public class DisplayInfoView extends JPanel
 
 		private void buildListeners()
 			{
-				isHelperOn.addItemListener(new ItemListener()
+				helperCheckBox.addItemListener(new ItemListener()
 					{
 						public void itemStateChanged(ItemEvent checked)
 							{
 
-								if (checked.getStateChange() == ItemEvent.DESELECTED)
+								if (checked.getStateChange() == ItemEvent.SELECTED)
 									{
-										baseController.setIsHelperOn("False");
-										updateInfoText();
+										baseController.setIsHelperOn("Yes");
 									}
 								else
 									{
-										baseController.setIsHelperOn("True");
-										updateInfoText();
+										baseController.setIsHelperOn("No");
 									}
+								updateInfoText();
 							}
 					});
 			}
@@ -118,4 +119,25 @@ public class DisplayInfoView extends JPanel
 			{
 				displayGuesses.setText("Amount of Guesses: " + counter);
 			}
+		
+		public void setHintBox(boolean isOn)
+		{
+			this.isOn = isOn;
+			
+			if(isOn)
+				{
+				helperCheckBox.setSelected(true);
+			isOn = true;
+				}
+			else
+				{
+				helperCheckBox.setSelected(false);
+			isOn = false;
+				}
+		}
+		
+		public boolean getHint()
+		{
+			return isOn;
+		}
 	}

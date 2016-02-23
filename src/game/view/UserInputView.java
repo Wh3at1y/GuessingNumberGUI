@@ -64,6 +64,7 @@ public class UserInputView extends JPanel
 				{
 					userGuess = Integer.parseInt(userInputField.getText());
 					baseController.getFrame().getBasePanel().getDisplayView().setGuessesText(baseController.getNumbers().getCounter());
+					
 					if(baseController.getFrame().getBasePanel().getDiffView().getDifficultyNumber() == 1)
 						baseController.getNumbers().checkEasy();
 					else if(baseController.getFrame().getBasePanel().getDiffView().getDifficultyNumber() == 2)

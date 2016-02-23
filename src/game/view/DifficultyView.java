@@ -11,7 +11,6 @@ import game.model.RandomNumbers;
 public class DifficultyView extends JPanel
 {
 	private GameController baseController;
-	private RandomNumbers genNum;
 	
 	private SpringLayout baseLayout;
 	
@@ -71,6 +70,9 @@ public class DifficultyView extends JPanel
 						baseController.setCounter(0);
 						baseController.getNumbers().generateEasy();
 						baseController.setDiffText("Easy");
+						baseController.setShowNumbers("1-50");
+						baseController.setIsHelperOn("Yes");
+						baseController.getFrame().getBasePanel().getDisplayView().setHintBox(true);
 						baseController.getFrame().getBasePanel().getDisplayView().updateInfoText();
 						
 						difficultyNumber = 1;
@@ -83,6 +85,9 @@ public class DifficultyView extends JPanel
 				baseController.setCounter(0);
 				baseController.getNumbers().generateNormal();
 				baseController.setDiffText("Normal");
+				baseController.setShowNumbers("1-150");
+				baseController.setIsHelperOn("Yes");
+				baseController.getFrame().getBasePanel().getDisplayView().setHintBox(true);
 				baseController.getFrame().getBasePanel().getDisplayView().updateInfoText();
 				
 				difficultyNumber = 2;
@@ -95,6 +100,9 @@ public class DifficultyView extends JPanel
 				baseController.setCounter(0);
 				baseController.getNumbers().generateHard();
 				baseController.setDiffText("Hard");
+				baseController.setShowNumbers("1-300");
+				baseController.setIsHelperOn("No");
+				baseController.getFrame().getBasePanel().getDisplayView().setHintBox(false);
 				baseController.getFrame().getBasePanel().getDisplayView().updateInfoText();
 				
 				difficultyNumber = 3;

@@ -40,12 +40,32 @@ public class RandomNumbers
 				baseController.getFrame().getBasePanel().getDisplayView().setGuessesText(counter);
 				
 				int userGuess = baseController.getFrame().getBasePanel().getUserInputView().getUserGuess();
-				if (userGuess == easyNumber)
+				if(userGuess != easyNumber)
+					{
+						if(baseController.getFrame().getBasePanel().getDisplayView().getHint() == true)
+							{
+								if(userGuess > easyNumber)
+									{
+										baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was too high. Try again.");
+									}
+								else if(userGuess < easyNumber)
+									{
+										baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was too low. Try again.");
+									}
+								
+							}
+						else if(baseController.getFrame().getBasePanel().getDisplayView().getHint() == false)
+							{
+								if(userGuess != easyNumber)
+									{
+										baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was wrong. Try again.");
+									}
+							}
+					}
+				if(userGuess == easyNumber)
 					{
 						baseController.getFrame().getBasePanel().getDisplayView().setHintText("Wow! You guessed it!");
 					}
-				else
-						baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was wrong. Try again.");
 			}
 
 		public void checkNormal()
