@@ -21,8 +21,10 @@ public class DisplayInfoView extends JPanel
 		private JTextArea displayGuesses;
 		private JTextArea displayHint;
 		private JTextArea displayGameInfo;
+		private JTextArea displayUserGuesses;
 		private JCheckBox helperCheckBox;
-		
+		private JScrollPane guessPane;
+
 		private boolean isOn;
 
 		public DisplayInfoView(GameController baseController)
@@ -30,32 +32,41 @@ public class DisplayInfoView extends JPanel
 				this.baseController = baseController;
 				baseLayout = new SpringLayout();
 
+				displayUserGuesses = new JTextArea();
 				helperCheckBox = new JCheckBox("Higher/Lower Hints");
-				baseLayout.putConstraint(SpringLayout.NORTH, helperCheckBox, 60, SpringLayout.NORTH, this);
-				baseLayout.putConstraint(SpringLayout.EAST, helperCheckBox, -160, SpringLayout.EAST, this);
 				clearButton = new JButton("Clear Guesses");
 				clearButton.setVisible(true);
 				displayGuesses = new JTextArea();
-				baseLayout.putConstraint(SpringLayout.NORTH, displayGuesses, 10, SpringLayout.NORTH, this);
-				baseLayout.putConstraint(SpringLayout.SOUTH, displayGuesses, -45, SpringLayout.SOUTH, this);
 				displayGuesses.setEditable(false);
 				displayGuesses.setText("Amount of Guesses: 0");
 				displayHint = new JTextArea();
-				baseLayout.putConstraint(SpringLayout.WEST, displayHint, 6, SpringLayout.EAST, clearButton);
 				displayHint.setEditable(false);
 				displayHint.setWrapStyleWord(true);
 				displayHint.setLineWrap(true);
 				displayHint.setOpaque(false);
 				displayGameInfo = new JTextArea();
-				baseLayout.putConstraint(SpringLayout.EAST, displayHint, -6, SpringLayout.WEST, displayGameInfo);
+
 				displayGameInfo.setEditable(false);
 				displayGameInfo.setWrapStyleWord(true);
 				displayGameInfo.setLineWrap(true);
 
+				setupChatPane();
 				buildPanel();
 				buildPlacements();
 				buildListeners();
 				setHintBox(true);
+			}
+
+		private void setupChatPane()
+			{
+				displayUserGuesses.setLineWrap(true);
+				displayUserGuesses.setWrapStyleWord(true);
+				displayUserGuesses.setEnabled(false);
+				displayUserGuesses.setEditable(false);
+				guessPane = new JScrollPane(displayUserGuesses);
+
+				guessPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+				guessPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 			}
 
 		private void buildPanel()
@@ -68,6 +79,7 @@ public class DisplayInfoView extends JPanel
 				add(displayGuesses);
 				add(displayHint);
 				add(displayGameInfo);
+				add(guessPane);
 			}
 
 		private void buildPlacements()
@@ -80,9 +92,19 @@ public class DisplayInfoView extends JPanel
 				baseLayout.putConstraint(SpringLayout.WEST, displayGameInfo, -153, SpringLayout.EAST, this);
 				baseLayout.putConstraint(SpringLayout.NORTH, displayHint, 10, SpringLayout.NORTH, this);
 				baseLayout.putConstraint(SpringLayout.SOUTH, displayHint, -10, SpringLayout.SOUTH, this);
-				baseLayout.putConstraint(SpringLayout.WEST, displayGuesses, 10, SpringLayout.WEST, this);
 				baseLayout.putConstraint(SpringLayout.WEST, clearButton, 10, SpringLayout.WEST, this);
 				baseLayout.putConstraint(SpringLayout.SOUTH, clearButton, -10, SpringLayout.SOUTH, this);
+				baseLayout.putConstraint(SpringLayout.NORTH, displayGuesses, 10, SpringLayout.NORTH, this);
+				baseLayout.putConstraint(SpringLayout.WEST, displayGuesses, 15, SpringLayout.WEST, this);
+				baseLayout.putConstraint(SpringLayout.SOUTH, displayGuesses, -147, SpringLayout.SOUTH, this);
+				baseLayout.putConstraint(SpringLayout.NORTH, guessPane, 0, SpringLayout.SOUTH, displayGuesses);
+				baseLayout.putConstraint(SpringLayout.WEST, guessPane, 15, SpringLayout.WEST, this);
+				baseLayout.putConstraint(SpringLayout.SOUTH, guessPane, 0, SpringLayout.NORTH, clearButton);
+				baseLayout.putConstraint(SpringLayout.EAST, guessPane, -15, SpringLayout.WEST, displayHint);
+				baseLayout.putConstraint(SpringLayout.EAST, displayHint, -6, SpringLayout.WEST, displayGameInfo);
+				baseLayout.putConstraint(SpringLayout.WEST, displayHint, 6, SpringLayout.EAST, clearButton);
+				baseLayout.putConstraint(SpringLayout.NORTH, helperCheckBox, 60, SpringLayout.NORTH, this);
+				baseLayout.putConstraint(SpringLayout.EAST, helperCheckBox, -160, SpringLayout.EAST, this);
 			}
 
 		private void buildListeners()
@@ -95,12 +117,22 @@ public class DisplayInfoView extends JPanel
 								if (checked.getStateChange() == ItemEvent.SELECTED)
 									{
 										baseController.setIsHelperOn("Yes");
+										isOn = true;
 									}
 								else
 									{
 										baseController.setIsHelperOn("No");
+										isOn = false;
 									}
 								updateInfoText();
+							}
+					});
+				
+				clearButton.addActionListener(new ActionListener()
+					{
+						public void actionPerformed(ActionEvent clicked)
+							{
+								displayUserGuesses.setText("");
 							}
 					});
 			}
@@ -119,25 +151,30 @@ public class DisplayInfoView extends JPanel
 			{
 				displayGuesses.setText("Amount of Guesses: " + counter);
 			}
-		
+
+		public void setUserGuessesText(String userGuess)
+			{
+				displayUserGuesses.append(userGuess);
+			}
+
 		public void setHintBox(boolean isOn)
-		{
-			this.isOn = isOn;
-			
-			if(isOn)
-				{
-				helperCheckBox.setSelected(true);
-			isOn = true;
-				}
-			else
-				{
-				helperCheckBox.setSelected(false);
-			isOn = false;
-				}
-		}
-		
+			{
+				this.isOn = isOn;
+
+				if (isOn)
+					{
+						helperCheckBox.setSelected(true);
+						this.isOn = true;
+					}
+				else
+					{
+						helperCheckBox.setSelected(false);
+						this.isOn = false;
+					}
+			}
+
 		public boolean getHint()
-		{
-			return isOn;
-		}
+			{
+				return this.isOn;
+			}
 	}

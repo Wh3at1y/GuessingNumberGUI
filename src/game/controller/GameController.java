@@ -10,9 +10,9 @@ public class GameController
 	private RandomNumbers genNumber;
 	private LookAndFeel lookFeel;
 	
-	private String diffText;
+	private String diffText = "Select";
 	private String isHelperOn = "";
-	private String showNumbers;
+	private String showNumbers = "";
 	
 	public GameController()
 	{

@@ -74,12 +74,32 @@ public class RandomNumbers
 				baseController.getFrame().getBasePanel().getDisplayView().setGuessesText(counter);
 				
 				int userGuess = baseController.getFrame().getBasePanel().getUserInputView().getUserGuess();
-				if (userGuess == normalNumber)
+				if(userGuess != normalNumber)
+					{
+						if(baseController.getFrame().getBasePanel().getDisplayView().getHint() == true)
+							{
+								if(userGuess > normalNumber)
+									{
+										baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was too high. Try again.");
+									}
+								else if(userGuess < normalNumber)
+									{
+										baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was too low. Try again.");
+									}
+								
+							}
+						else if(baseController.getFrame().getBasePanel().getDisplayView().getHint() == false)
+							{
+								if(userGuess != normalNumber)
+									{
+										baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was wrong. Try again.");
+									}
+							}
+					}
+				if(userGuess == normalNumber)
 					{
 						baseController.getFrame().getBasePanel().getDisplayView().setHintText("Wow! You guessed it!");
 					}
-				else
-						baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was wrong. Try again.");
 			}
 
 		public void checkHard()
@@ -88,12 +108,32 @@ public class RandomNumbers
 				baseController.getFrame().getBasePanel().getDisplayView().setGuessesText(counter);
 				
 				int userGuess = baseController.getFrame().getBasePanel().getUserInputView().getUserGuess();
-				if (userGuess == hardNumber)
+				if(userGuess != hardNumber)
+					{
+						if(baseController.getFrame().getBasePanel().getDisplayView().getHint() == true)
+							{
+								if(userGuess > hardNumber)
+									{
+										baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was too high. Try again.");
+									}
+								else if(userGuess < hardNumber)
+									{
+										baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was too low. Try again.");
+									}
+								
+							}
+						else if(baseController.getFrame().getBasePanel().getDisplayView().getHint() == false)
+							{
+								if(userGuess != hardNumber)
+									{
+										baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was wrong. Try again.");
+									}
+							}
+					}
+				if(userGuess == hardNumber)
 					{
 						baseController.getFrame().getBasePanel().getDisplayView().setHintText("Wow! You guessed it!");
 					}
-				else
-						baseController.getFrame().getBasePanel().getDisplayView().setHintText("Your guess was wrong. Try again.");
 			}
 		
 		public int getCounter()
