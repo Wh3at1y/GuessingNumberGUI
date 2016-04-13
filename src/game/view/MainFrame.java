@@ -5,12 +5,10 @@ import game.controller.GameController;
 
 public class MainFrame extends JFrame
 {
-	private GameController baseController;
 	private MainPanel basePanel;
 	
 	public MainFrame(GameController baseController)
 	{
-		this.baseController = baseController;
 		basePanel = new MainPanel(baseController);
 		
 		buildFrame();

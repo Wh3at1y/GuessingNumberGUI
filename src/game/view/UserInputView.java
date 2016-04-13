@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import game.controller.GameController;
-import game.model.RandomNumbers;
 
 public class UserInputView extends JPanel
 	{

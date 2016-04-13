@@ -6,7 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import game.controller.GameController;
-import game.model.RandomNumbers;
 
 public class DifficultyView extends JPanel
 {

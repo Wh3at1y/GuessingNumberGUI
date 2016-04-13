@@ -7,7 +7,6 @@ import game.controller.GameController;
 
 public class MainPanel extends JPanel
 {
-	private GameController baseController;
 	
 	private SpringLayout baseLayout;
 	
@@ -17,7 +16,6 @@ public class MainPanel extends JPanel
 
 	public MainPanel(GameController baseController)
 	{
-		this.baseController = baseController;
 		
 		baseLayout = new SpringLayout();
 		
